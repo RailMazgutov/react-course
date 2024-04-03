@@ -9,14 +9,16 @@ import ExpensesFilter from "./ExpensesFilter";
 const Expenses = (props) => {
     const [filteredYear, setFilteredYear] = useState('2020');
     
-    const filterChageHandler = year => {
+    const filterChangeHandler = year => {
         setFilteredYear(year);
     }
 
-    const expenses = props.expenses;
+    const expenses = props.expenses.filter(expense => {
+        return expense.date.getFullYear().toString() === filteredYear;
+    });
     return (
         <Card className='expenses'>
-            <ExpensesFilter onChangeFilter={filterChageHandler} selected={filteredYear}/>
+            <ExpensesFilter onChangeFilter={filterChangeHandler} selected={filteredYear}/>
             {expenses.map(expense => <ExpenseItem key={expense.id} title={expense.title} amount={expense.amount} date={expense.date}/>)}
         </Card>
     )
