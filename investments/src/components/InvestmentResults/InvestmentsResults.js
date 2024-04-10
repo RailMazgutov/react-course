@@ -1,5 +1,16 @@
 import styles from './InvestmentsResults.module.css'
 
+const InvestmentYear = (props) => {
+  return (
+  <tr>
+    <td>YEAR NUMBER</td>
+    <td>TOTAL SAVINGS END OF YEAR</td>
+    <td>INTEREST GAINED IN YEAR</td>
+    <td>TOTAL INTEREST GAINED</td>
+    <td>TOTAL INVESTED CAPITAL</td>
+  </tr>);
+}
+
 const InvestmentsResults = (props) => {
   if (props.items.length === 0) {
     return <p>No investments to show.</p>;
@@ -16,15 +27,7 @@ const InvestmentsResults = (props) => {
         </tr>
       </thead>
       <tbody>
-          {props.items.map(item => 
-              <tr>
-                  <td>YEAR NUMBER</td>
-                  <td>TOTAL SAVINGS END OF YEAR</td>
-                  <td>INTEREST GAINED IN YEAR</td>
-                  <td>TOTAL INTEREST GAINED</td>
-                  <td>TOTAL INVESTED CAPITAL</td>
-              </tr>
-          )}
+          {props.items.map(item => <InvestmentYear year={item}/>)}
       </tbody>
     </table>
   );

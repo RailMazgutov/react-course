@@ -39,7 +39,7 @@ function App() {
       {/* Todo: Show below table conditionally (only once result data is available) */}
       {/* Show fallback text if no data is available */}
 
-      <InvestmentsResults items={[]}/>
+      <InvestmentsResults items={[0]}/>
     </div>
   );
 }
