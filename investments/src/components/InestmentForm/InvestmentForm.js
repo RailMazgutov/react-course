@@ -1,6 +1,6 @@
-import styles from './NewInvestment.module.css'
+import styles from './InvestmentForm.module.css'
 
-const NewInvestment = (props) => {
+const InvestmentForm = (props) => {
     return (
         <form className={styles.form}>
             <div className={styles['input-group']}>
@@ -37,4 +37,4 @@ const NewInvestment = (props) => {
     );
 }
 
-export default NewInvestment;
+export default InvestmentForm;
