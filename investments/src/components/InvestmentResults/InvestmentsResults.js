@@ -20,7 +20,7 @@ const InvestmentYear = (props) => {
 
 const InvestmentsResults = (props) => {
   if (props.items.length === 0) {
-    return <p>No investments to show.</p>;
+    return <p style={{textAlign: 'center'}}>No investments to show.</p>;
   }
   return (
       <table className={styles.result}>
