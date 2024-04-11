@@ -26,6 +26,7 @@ function App() {
         yearlyInterest: yearlyInterest,
         savingsEndOfYear: currentSavings,
         yearlyContribution: yearlyContribution,
+        totalInterest: currentSavings - userInput.currentSavings - yearlyContribution * (i + 1)
       });
     }
     setInvestmentResults(yearlyData);

@@ -1,13 +1,20 @@
 import styles from './InvestmentsResults.module.css'
 
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'EUR',
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+})
+
 const InvestmentYear = (props) => {
   return (
   <tr>
-    <td>YEAR NUMBER</td>
-    <td>TOTAL SAVINGS END OF YEAR</td>
-    <td>INTEREST GAINED IN YEAR</td>
-    <td>TOTAL INTEREST GAINED</td>
-    <td>TOTAL INVESTED CAPITAL</td>
+    <td>{props.item.year}</td>
+    <td>{formatter.format(props.item.savingsEndOfYear)}</td>
+    <td>{formatter.format(props.item.yearlyInterest)}</td>
+    <td>{formatter.format(props.item.totalInterest)}</td>
+    <td>{formatter.format(props.item.savingsEndOfYear - props.item.totalInterest)}</td>
   </tr>);
 }
 
@@ -27,7 +34,7 @@ const InvestmentsResults = (props) => {
         </tr>
       </thead>
       <tbody>
-          {props.items.map(item => <InvestmentYear year={item}/>)}
+          {props.items.map(item => <InvestmentYear key={item.year} item={item}/>)}
       </tbody>
     </table>
   );
