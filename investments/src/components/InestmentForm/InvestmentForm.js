@@ -9,7 +9,12 @@ const InvestmentForm = (props) => {
 
     const formSubmitHandler = (event) => {
         event.preventDefault();
-        console.log('submit');
+        props.onFormSubmit({
+            currentSavings: currentSavings,
+            yearlyContribution: yearlyContribution,
+            expectedReturn: expectedReturn,
+            duration: duration
+        });
     }
 
     const formResetHandler = (event) => {
@@ -17,6 +22,7 @@ const InvestmentForm = (props) => {
         setYearlyContribution('');
         setExpectedReturn('');
         setDuration('');
+        props.onFormReset();
     }
 
     const currentSavingsChangeHandler = (event) => {
