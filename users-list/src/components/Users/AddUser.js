@@ -10,7 +10,15 @@ const AddUser = (props) => {
     const [enteredAge, setEnteredAge] = useState('');
     const formSubmitHandler = (event) => {
         event.preventDefault();
+        if (enteredAge.trim().length === 0 || +enteredAge < 1) {
+            return;
+        }
+        if (enteredUsername.trim().length === 0) {
+            return;
+        }
         console.log(enteredUsername, enteredAge);
+        setEnteredUsername('');
+        setEnteredAge('');
     };
 
     const usernameChangeHandler = (event) => {
