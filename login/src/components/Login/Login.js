@@ -1,7 +1,8 @@
-import React, {useEffect, useReducer, useState} from 'react';
+import styles from './Login.module.css';
+
+import {useEffect, useReducer, useState} from 'react';
 
 import Card from '../UI/Card/Card';
-import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
 
 const emailReducer = (state, action) => {
@@ -33,14 +34,15 @@ const Login = (props) => {
     const [emailState, dispatchEmail] = useReducer(emailReducer, {value: '', isValid: null});
     const [passwordState, dispatchPassword] = useReducer(passwordReducer, {value: '', isValid: null});
 
+    const {isValid: emailIsValid} = emailState;
+    const {isValid: passwordIsValid} = passwordState;
+
     useEffect(() => {
         const handler = setTimeout(() => {
-            setFormIsValid(emailState.isValid && passwordState.isValid);
+            setFormIsValid(emailIsValid && passwordIsValid);
         }, 500);
-        return () => {
-            clearTimeout(handler);
-        };
-    }, [emailState, passwordState]);
+        return () => { clearTimeout(handler); };
+    }, [emailIsValid, passwordIsValid]);
 
     const emailChangeHandler = (event) => {
         dispatchEmail({value: event.target.value, type: "USER_INPUT"});
@@ -64,11 +66,11 @@ const Login = (props) => {
     };
 
     return (
-        <Card className={classes.login}>
+        <Card className={styles.login}>
             <form onSubmit={submitHandler}>
                 <div
-                    className={`${classes.control} ${
-                        emailState.isValid === false ? classes.invalid : ''
+                    className={`${styles.control} ${
+                        emailState.isValid === false ? styles.invalid : ''
                     }`}
                 >
                     <label htmlFor="email">E-Mail</label>
@@ -81,8 +83,8 @@ const Login = (props) => {
                     />
                 </div>
                 <div
-                    className={`${classes.control} ${
-                        passwordState.isValid === false ? classes.invalid : ''
+                    className={`${styles.control} ${
+                        passwordState.isValid === false ? styles.invalid : ''
                     }`}
                 >
                     <label htmlFor="password">Password</label>
@@ -94,8 +96,8 @@ const Login = (props) => {
                         onBlur={validatePasswordHandler}
                     />
                 </div>
-                <div className={classes.actions}>
-                    <Button type="submit" className={classes.btn} disabled={!formIsValid}>
+                <div className={styles.actions}>
+                    <Button type="submit" className={styles.btn} disabled={!formIsValid}>
                         Login
                     </Button>
                 </div>
