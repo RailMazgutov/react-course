@@ -1,6 +1,6 @@
 import styles from './Login.module.css';
 
-import {useContext, useEffect, useReducer, useState} from 'react';
+import {useContext, useEffect, useReducer, useState, useRef} from 'react';
 
 import Card from '../UI/Card/Card';
 import Button from '../UI/Button/Button';
@@ -37,6 +37,9 @@ const Login = (props) => {
     const [emailState, dispatchEmail] = useReducer(emailReducer, {value: '', isValid: null});
     const [passwordState, dispatchPassword] = useReducer(passwordReducer, {value: '', isValid: null});
 
+    const emailRef = useRef();
+    const passwordRef = useRef();
+
     const {isValid: emailIsValid} = emailState;
     const {isValid: passwordIsValid} = passwordState;
 
@@ -65,13 +68,20 @@ const Login = (props) => {
 
     const submitHandler = (event) => {
         event.preventDefault();
-        ctx.onLogin(emailState.value, passwordState.value);
+        if (formIsValid) {
+            ctx.onLogin(emailState.value, passwordState.value);
+        } else if (!emailIsValid) {
+            emailRef.current.focus();
+        } else {
+            passwordRef.current.focus();
+        }
     };
 
     return (
         <Card className={styles.login}>
             <form onSubmit={submitHandler}>
                 <Input 
+                    ref={emailRef}
                     id="email" 
                     label="E-Mail" 
                     type="email" 
@@ -80,6 +90,7 @@ const Login = (props) => {
                     onChange={emailChangeHandler}
                     onBlur={validateEmailHandler}/>
                 <Input 
+                    ref={passwordRef}
                     id="password" 
                     label="Password" 
                     type="password" 
@@ -88,7 +99,7 @@ const Login = (props) => {
                     onChange={passwordChangeHandler}
                     onBlur={validatePasswordHandler}/>
                 <div className={styles.actions}>
-                    <Button type="submit" className={styles.btn} disabled={!formIsValid}>
+                    <Button type="submit" className={styles.btn}>
                         Login
                     </Button>
                 </div>
