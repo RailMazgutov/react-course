@@ -1,4 +1,5 @@
 import { currencyFormatter } from "../util/formating"
+import Button from "../UI/Button"
 
 export default function MealItem({ meal }) {
     return <li className="meal-item">
@@ -6,11 +7,11 @@ export default function MealItem({ meal }) {
             <img src={`http://localhost:3000/${meal.image}`} alt={meal.name}/>
             <div>
                 <h3>{meal.name}</h3>
-                <p className="meal-item-price">{currencyFormatter(meal.price})</p>
+                <p className="meal-item-price">{currencyFormatter(meal.price)}</p>
                 <p className="meal-item-description">{meal.description}</p>
             </div>
             <p className="meal-item-actions">
-                <button>Add to cart</button>
+                <Button>Add to cart</Button>
             </p>
         </article>
     </li>
