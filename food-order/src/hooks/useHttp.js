@@ -14,28 +14,31 @@ async function sendHttpRequest(url, config) {
     return resData;
 }
 
-export default function useHttp(url, config) {
-    const [data, setData] = useState();
-    const [isLoadig, setIsLoading] = useState(false);
+export default function useHttp(url, config, initialData) {
+    const [data, setData] = useState(initialData);
+    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState();
 
     const sendRequest = useCallback(async function () {
         setIsLoading(true);
         try {
-            const resData = sendHttpRequest(url, config);
+            const resData = await sendHttpRequest(url, config);
+            setData(resData);
         } catch (error) {
             setError(error.message);
         }
         setIsLoading(false);
-    }, []);
+    }, [url, config]);
 
     useEffect(() => {
+        if ((config && (config.method === 'GET' || !config.method)) || !config) {
         sendRequest();
-    }, [sendRequest]);
+        }
+    }, [sendRequest, config]);
 
     return {
         data,
-        isLoadig,
+        isLoading,
         error,
         sendRequest
     };
