@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import {useCallback, useEffect, useState} from "react";
 
 async function sendHttpRequest(url, config) {
     const response = await fetch(url, config)
 
-    const resData = await response.jaon();
+    const resData = await response.json();
 
     if (!response.ok) {
         throw new Error(
