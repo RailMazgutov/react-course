@@ -7,15 +7,15 @@ import {useSelector} from 'react-redux'
 
 
 function App() {
-  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
-  return (
-    <>
-      <Header />
-      {!isAuthenticated && <Auth />}
-      {isAuthenticated && <UserProfile />}
-      <Counter />
-    </>
-  );
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+    return (
+        <>
+            <Header/>
+            {!isAuthenticated && <Auth/>}
+            {isAuthenticated && <UserProfile/>}
+            <Counter/>
+        </>
+    );
 }
 
 export default App;
