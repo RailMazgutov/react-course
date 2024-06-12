@@ -4,8 +4,6 @@ import EventsNavigation from "../components/EventsNavigation";
 export default function EventsLayout() {
     return <>
         <EventsNavigation />
-        <main>
-            <Outlet />
-        </main>
+        <Outlet />
     </>;
 }

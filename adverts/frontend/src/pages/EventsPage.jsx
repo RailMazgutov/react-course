@@ -11,7 +11,7 @@ export default function EventsPage() {
     return <>
         <h1>Events Page</h1>
         <li>
-            {EVENTS.map(event => <ul key={event.id}><Link to={`/events/${event.id}`}>{event.title}</Link></ul>)}
+            {EVENTS.map(event => <ul key={event.id}><Link to={event.id}>{event.title}</Link></ul>)}
         </li>
     </>;
 }
