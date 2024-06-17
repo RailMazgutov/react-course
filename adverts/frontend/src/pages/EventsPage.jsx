@@ -10,7 +10,7 @@ function EventsPage() {
 export async function loader() {
   const response = await fetch('http://localhost:8080/events');
   if (!response.ok) {
-    // ...
+    throw { message: "Failed to load events." };
   } else {
     return response;
   }
