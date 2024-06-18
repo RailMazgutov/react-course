@@ -3,7 +3,8 @@ import PageContent from "./PageContent";
 
 export default function ErrorPage() {
     const error = useRouteError();
-    let title = "An error occured!";
+    console.log(error);
+    let title = "An error occurred!";
     let message = "Something went wrong!";
 
     if (error.status === 500) {

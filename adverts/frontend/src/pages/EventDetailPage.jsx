@@ -15,7 +15,6 @@ export async function loader({request, params}) {
     if (!response.ok) {
         throw json({message: "Failed to load the event!"}, {status: 500});
     } else {
-        console.log(response);
         return response;
     }
 }
