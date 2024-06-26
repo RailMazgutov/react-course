@@ -1,14 +1,15 @@
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 
-import EditEventPage from "./pages/EditEventPage";
-import EventDetailPage, {deleteEventAction, loader as eventDetailLoader} from "./pages/EventDetailPage";
-import EventsLayout from "./pages/EventsLayout";
-import EventsPage, {loader as eventsLoader} from "./pages/EventsPage";
-import HomePage from "./pages/HomePage";
-import NewEventPage from "./pages/NewEventPage";
-import RootLayout from "./pages/RootLayout";
-import ErrorPage from "./pages/ErrorPage";
-import {action as CUEvent} from './components/EventForm'
+import EditEventPage from './pages/EditEventPage';
+import ErrorPage from './pages/ErrorPage';
+import EventDetailPage, {action as deleteEventAction, loader as eventDetailLoader,} from './pages/EventDetailPage';
+import EventsPage, {loader as eventsLoader} from './pages/EventsPage';
+import EventsRootLayout from './pages/EventsLayout';
+import HomePage from './pages/HomePage';
+import NewEventPage from './pages/NewEventPage';
+import RootLayout from './pages/RootLayout';
+import {action as manipulateEventAction} from './components/EventForm';
+import NewsletterPage, {action as newsletterAction} from './pages/Newsletter';
 
 const router = createBrowserRouter([
     {
@@ -19,23 +20,43 @@ const router = createBrowserRouter([
             {index: true, element: <HomePage/>},
             {
                 path: 'events',
-                element: <EventsLayout/>,
+                element: <EventsRootLayout/>,
                 children: [
-                    {index: true, element: <EventsPage/>, loader: eventsLoader},
+                    {
+                        index: true,
+                        element: <EventsPage/>,
+                        loader: eventsLoader,
+                    },
                     {
                         path: ':eventId',
                         id: 'event-detail',
                         loader: eventDetailLoader,
                         children: [
-                            {index: true, element: <EventDetailPage/>, action: deleteEventAction},
-                            {path: 'edit', element: <EditEventPage/>, action: CUEvent},
-                        ]
+                            {
+                                index: true,
+                                element: <EventDetailPage/>,
+                                action: deleteEventAction,
+                            },
+                            {
+                                path: 'edit',
+                                element: <EditEventPage/>,
+                                action: manipulateEventAction,
+                            },
+                        ],
                     },
-                    {path: 'new', element: <NewEventPage/>, action: CUEvent},
-
-                ]
+                    {
+                        path: 'new',
+                        element: <NewEventPage/>,
+                        action: manipulateEventAction,
+                    },
+                ],
             },
-        ]
+            {
+                path: 'newsletter',
+                element: <NewsletterPage/>,
+                action: newsletterAction,
+            },
+        ],
     },
 ]);
 
