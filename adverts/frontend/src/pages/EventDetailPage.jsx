@@ -5,8 +5,7 @@ import {Suspense} from "react";
 
 export default function EventDetailPage() {
     const {event, events} = useRouteLoaderData('event-detail');
-    return (
-        <>
+    return (<>
             <Suspense fallback={<p style={{textAlign: 'center'}}>Loading event...</p>}>
                 <Await resolve={event}>
                     {(event) => <EventItem event={event}/>}
@@ -47,8 +46,7 @@ export async function loader({request, params}) {
     const id = params.eventId;
 
     return defer({
-        events: loadEvents(),
-        event: await loadEvent(id)
+        events: loadEvents(), event: await loadEvent(id)
     })
 }
 
